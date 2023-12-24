@@ -2,10 +2,14 @@
 import CartIcon from "@/assets/images/CartIcon.vue";
 import { ElMessage } from "element-plus";
 
-const open2 = () => {
+const props = defineProps({
+  product: null,
+})
+
+const added = () => {
   ElMessage({
     showClose: true,
-    message: "Added to Card",
+    message: "Added to Cart",
     type: "success",
   });
 };
@@ -20,28 +24,27 @@ const open2 = () => {
         class="card__box-img desktop-bg"
       />
       <img
-        src="@/assets/images/image-product-desktop.jpg"
+        src="../../assets/images/image-product-mobile.jpg"
         alt=""
         class="card__box-img mobile-bg"
       />
     </div>
 
     <div class="card__info">
-      <div class="card__info-type">Perfume</div>
+      <div class="card__info-type">{{ product?.category }}</div>
 
-      <h3 class="card__info-title">Gabrielle Essence Eau De Parfum</h3>
+      <h3 class="card__info-title">{{ product?.name }}</h3>
 
       <div class="card__info-txt">
-        A floral, solar and voluptuous interpretation composed by Olivier Polge,
-        Perfumer-Creator for the House of CHANEL.
+        {{ product?.info }}
       </div>
 
       <span class="card__info-price">
-        $149.99
-        <span>$169.99</span>
+        ${{ (product?.price - (product?.price * product?.discount) + 0.01).toFixed(2) }}
+        <span>${{ product?.price }}</span>
       </span>
 
-      <button class="card__info-btn" :plain="true" @click="open2">
+      <button class="card__info-btn" :plain="true" @click="added">
         <CartIcon /> Add to Cart
       </button>
     </div>

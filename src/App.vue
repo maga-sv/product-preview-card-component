@@ -1,12 +1,16 @@
 <script setup>
 import Card from "./components/Card/Card.vue";
+import { useProductsStore } from "@/stores/products.js";
+
+const productsStore = useProductsStore()
+
 </script>
 
 <template>
   <main>
     <section class="products">
       <div class="container">
-          <Card />
+          <Card v-for="(product, index) in productsStore?.products" :key="index" :product="product" />
       </div>
     </section>
   </main>
