@@ -5,7 +5,7 @@ import { ElMessage } from "element-plus";
 const open2 = () => {
   ElMessage({
     showClose: true,
-    message: "Congrats, this is a success message.",
+    message: "Added to Card",
     type: "success",
   });
 };
@@ -17,7 +17,12 @@ const open2 = () => {
       <img
         src="@/assets/images/image-product-desktop.jpg"
         alt=""
-        class="card__box-img"
+        class="card__box-img desktop-bg"
+      />
+      <img
+        src="@/assets/images/image-product-desktop.jpg"
+        alt=""
+        class="card__box-img mobile-bg"
       />
     </div>
 
@@ -36,8 +41,9 @@ const open2 = () => {
         <span>$169.99</span>
       </span>
 
-      <button class="card__info-btn" :plain="true" @click="open2"
-        ><CartIcon /> Add to Cart</button>
+      <button class="card__info-btn" :plain="true" @click="open2">
+        <CartIcon /> Add to Cart
+      </button>
     </div>
   </div>
 </template>
@@ -56,6 +62,10 @@ const open2 = () => {
     width: 100%;
     overflow: hidden;
 
+    @media (max-width: 636px) {
+      height: 320px;
+    }
+
     &-img {
       object-fit: cover;
       width: 100%;
@@ -70,12 +80,17 @@ const open2 = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 15px;
 
     &-type {
       text-transform: uppercase;
       font-weight: 500;
       color: var(--secAccentColor);
       letter-spacing: 3px;
+
+      @media (max-width: 636px) {
+        font-size: 14px;
+      }
     }
 
     &-title {
@@ -83,6 +98,10 @@ const open2 = () => {
       color: var(--accentColor);
       font-family: "Fraunces", serif;
       font-weight: 700;
+
+      @media (max-width: 636px) {
+        font-size: 30px;
+      }
     }
 
     &-txt {
@@ -118,10 +137,31 @@ const open2 = () => {
       align-items: center;
       justify-content: center;
       gap: 10px;
+      transition: 400ms;
 
       &:hover {
         background: hsl(159, 38%, 16%);
       }
+    }
+  }
+
+  &__box,
+  &__info {
+    @media (max-width: 636px) {
+      max-width: 100%;
+    }
+  }
+
+  .mobile-bg {
+    display: none;
+    @media (max-width: 636px) {
+      display: flex;
+    }
+  }
+
+  .desktop-bg {
+    @media (max-width: 636px) {
+      display: none;
     }
   }
 }
